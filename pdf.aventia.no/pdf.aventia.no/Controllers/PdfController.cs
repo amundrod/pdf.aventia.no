@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using pdf.aventia.no.Interfaces;
 
@@ -14,12 +15,21 @@ namespace pdf.aventia.no.Controllers
             this.pdfService = pdfService;
         }
 
-        [Route("{pdfId}")]
-        [HttpGet]
-        public async Task Get(int pdfId)
+        // Index all PDF files in the folder
+        [HttpGet("index")]
+        public async Task<IActionResult> IndexAllPdfFiles()
         {
-            string folderPath = @"C:\Users\elias\Downloads\PDF";
+            string folderPath = @"C:\Users\amund\OneDrive\Skrivebord\PdfTest";
             await pdfService.IndexAllPdfFilesInFolder(folderPath);
+            return Ok("PDF files indexed successfully.");
+        }
+
+        // Get paragraphs for a specific PDF ID
+        [HttpGet("{pdfId}")]
+        public async Task<IActionResult> GetParagraphsByPdfId(int pdfId)
+        {
+            var paragraphs = await pdfService.JustASampleCall(pdfId);
+            return Ok(paragraphs);
         }
     }
 }

@@ -46,7 +46,7 @@ namespace pdf.aventia.no.Services
             await context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task IndexAllPdfFilesInFolder(string folderPath = @"C:\Users\elias\Downloads\PDF", CancellationToken cancellationToken = default)
+        public async Task IndexAllPdfFilesInFolder(string folderPath = @"C:\Users\amund\OneDrive\Skrivebord\PdfTest", CancellationToken cancellationToken = default)
         {
             var pdfFilePaths = Directory.GetFiles(folderPath, "*.pdf");
 

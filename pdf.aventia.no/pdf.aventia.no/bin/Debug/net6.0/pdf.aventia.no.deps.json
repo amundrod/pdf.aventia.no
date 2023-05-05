@@ -14,7 +14,7 @@
           "IronPdf": "2023.5.8",
           "MediatR": "11.1.0",
           "Microsoft.EntityFrameworkCore": "6.0.4",
-          "Pomelo.EntityFrameworkCore.MySql": "6.0.1",
+          "MySql.EntityFrameworkCore": "6.0.4",
           "Swashbuckle.AspNetCore": "6.5.0"
         },
         "runtime": {
@@ -118,7 +118,7 @@
       "Grpc.Core/2.46.6": {
         "dependencies": {
           "Grpc.Core.Api": "2.46.6",
-          "System.Memory": "4.5.3"
+          "System.Memory": "4.5.4"
         },
         "runtime": {
           "lib/netstandard2.0/Grpc.Core.dll": {
@@ -156,7 +156,7 @@
       },
       "Grpc.Core.Api/2.46.6": {
         "dependencies": {
-          "System.Memory": "4.5.3"
+          "System.Memory": "4.5.4"
         },
         "runtime": {
           "lib/netstandard2.1/Grpc.Core.Api.dll": {
@@ -233,7 +233,7 @@
           "Dapper": "1.50.5",
           "Hangfire.Core": "1.7.31",
           "Microsoft.CSharp": "4.4.1",
-          "MySqlConnector": "2.1.2",
+          "MySqlConnector": "1.0.0",
           "Newtonsoft.Json": "11.0.2"
         },
         "runtime": {
@@ -1086,6 +1086,40 @@
           }
         }
       },
+      "K4os.Compression.LZ4/1.2.6": {
+        "dependencies": {
+          "System.Memory": "4.5.4"
+        },
+        "runtime": {
+          "lib/netstandard2.0/K4os.Compression.LZ4.dll": {
+            "assemblyVersion": "1.2.6.0",
+            "fileVersion": "1.2.6.0"
+          }
+        }
+      },
+      "K4os.Compression.LZ4.Streams/1.2.6": {
+        "dependencies": {
+          "K4os.Compression.LZ4": "1.2.6",
+          "K4os.Hash.xxHash": "1.0.6"
+        },
+        "runtime": {
+          "lib/netstandard2.1/K4os.Compression.LZ4.Streams.dll": {
+            "assemblyVersion": "1.2.6.0",
+            "fileVersion": "1.2.6.0"
+          }
+        }
+      },
+      "K4os.Hash.xxHash/1.0.6": {
+        "dependencies": {
+          "System.Memory": "4.5.4"
+        },
+        "runtime": {
+          "lib/netstandard2.0/K4os.Hash.xxHash.dll": {
+            "assemblyVersion": "1.0.6.0",
+            "fileVersion": "1.0.6.0"
+          }
+        }
+      },
       "MediatR/11.1.0": {
         "dependencies": {
           "MediatR.Contracts": "1.0.1"
@@ -1132,15 +1166,15 @@
         }
       },
       "Microsoft.EntityFrameworkCore.Analyzers/6.0.4": {},
-      "Microsoft.EntityFrameworkCore.Relational/6.0.1": {
+      "Microsoft.EntityFrameworkCore.Relational/6.0.4": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "6.0.4",
           "Microsoft.Extensions.Configuration.Abstractions": "6.0.0"
         },
         "runtime": {
           "lib/net6.0/Microsoft.EntityFrameworkCore.Relational.dll": {
-            "assemblyVersion": "6.0.1.0",
-            "fileVersion": "6.0.121.56712"
+            "assemblyVersion": "6.0.4.0",
+            "fileVersion": "6.0.422.16106"
           }
         }
       },
@@ -1234,11 +1268,50 @@
           }
         }
       },
-      "MySqlConnector/2.1.2": {
+      "MySql.Data/8.0.30": {
+        "dependencies": {
+          "Google.Protobuf": "3.22.0",
+          "K4os.Compression.LZ4.Streams": "1.2.6",
+          "Portable.BouncyCastle": "1.9.0",
+          "System.Buffers": "4.5.1",
+          "System.Configuration.ConfigurationManager": "5.0.0",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.Security.Permissions": "5.0.0",
+          "System.Text.Encoding.CodePages": "5.0.0"
+        },
         "runtime": {
-          "lib/net6.0/MySqlConnector.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.1.2.0"
+          "lib/net6.0/MySql.Data.dll": {
+            "assemblyVersion": "8.0.30.0",
+            "fileVersion": "8.0.30.0"
+          },
+          "lib/net6.0/Ubiety.Dns.Core.dll": {
+            "assemblyVersion": "2.2.1.0",
+            "fileVersion": "2.2.1.0"
+          },
+          "lib/net6.0/ZstdNet.dll": {
+            "assemblyVersion": "1.4.5.0",
+            "fileVersion": "1.4.5.0"
+          }
+        }
+      },
+      "MySql.EntityFrameworkCore/6.0.4": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.4",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.4",
+          "MySql.Data": "8.0.30"
+        },
+        "runtime": {
+          "lib/net6.0/MySql.EntityFrameworkCore.dll": {
+            "assemblyVersion": "6.0.4.0",
+            "fileVersion": "6.0.4.0"
+          }
+        }
+      },
+      "MySqlConnector/1.0.0": {
+        "runtime": {
+          "lib/net5.0/MySqlConnector.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -1250,16 +1323,11 @@
           }
         }
       },
-      "Pomelo.EntityFrameworkCore.MySql/6.0.1": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "6.0.1",
-          "Microsoft.Extensions.DependencyInjection": "6.0.0",
-          "MySqlConnector": "2.1.2"
-        },
+      "Portable.BouncyCastle/1.9.0": {
         "runtime": {
-          "lib/net6.0/Pomelo.EntityFrameworkCore.MySql.dll": {
-            "assemblyVersion": "6.0.1.0",
-            "fileVersion": "6.0.1.0"
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
+            "assemblyVersion": "1.9.0.0",
+            "fileVersion": "1.9.0.1"
           }
         }
       },
@@ -1347,6 +1415,7 @@
           }
         }
       },
+      "System.Buffers/4.5.1": {},
       "System.Collections.Immutable/6.0.0": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
@@ -1431,7 +1500,7 @@
           "System.Threading.Tasks": "4.3.0"
         }
       },
-      "System.Memory/4.5.3": {},
+      "System.Memory/4.5.4": {},
       "System.Reflection/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "5.0.0",
@@ -1685,6 +1754,27 @@
       "path": "ironsoftware.system.drawing/2023.3.3",
       "hashPath": "ironsoftware.system.drawing.2023.3.3.nupkg.sha512"
     },
+    "K4os.Compression.LZ4/1.2.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4EN8EE6bZG2U8dFfeqn+Om3UNajK3cPYHvyQROCFm4jNFVLuRB7Nl5bDkjBSAjfctS6konm+ay3u5RafBzltDA==",
+      "path": "k4os.compression.lz4/1.2.6",
+      "hashPath": "k4os.compression.lz4.1.2.6.nupkg.sha512"
+    },
+    "K4os.Compression.LZ4.Streams/1.2.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5KMcNFRHeRrnJ9c8k5fZcfAJJEY0FndMiDiHIYa35Mx5KCMkeSNo/PEXu7YmtCoVczJagx+Vt7J/F+//S1PcJQ==",
+      "path": "k4os.compression.lz4.streams/1.2.6",
+      "hashPath": "k4os.compression.lz4.streams.1.2.6.nupkg.sha512"
+    },
+    "K4os.Hash.xxHash/1.0.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jCfNP0inx1sGcP3KSbpiDEH3km2e1sVBjMfKo+V92jr1dL4ZYgA1uhRMl1wAtdGZcbObXIikKqtVlgx3j/CW6g==",
+      "path": "k4os.hash.xxhash/1.0.6",
+      "hashPath": "k4os.hash.xxhash.1.0.6.nupkg.sha512"
+    },
     "MediatR/11.1.0": {
       "type": "package",
       "serviceable": true,
@@ -1727,12 +1817,12 @@
       "path": "microsoft.entityframeworkcore.analyzers/6.0.4",
       "hashPath": "microsoft.entityframeworkcore.analyzers.6.0.4.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Relational/6.0.1": {
+    "Microsoft.EntityFrameworkCore.Relational/6.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-abaCEEeeB0xlMYDD+m9kmhQh5aipJ5s3UbyQVBfMaZeCiZHXST0eWuJRX63E3e7K/mju5WEHiybV/hizng7q/w==",
-      "path": "microsoft.entityframeworkcore.relational/6.0.1",
-      "hashPath": "microsoft.entityframeworkcore.relational.6.0.1.nupkg.sha512"
+      "sha512": "sha512-E867NbEXYRTElBF5ff+1AN5Awa1jkORy/Rrm0ueibaTAV5uw89LsLoH6yTe+b9urZTWMHtLfGd1RDdNjk8+KzA==",
+      "path": "microsoft.entityframeworkcore.relational/6.0.4",
+      "hashPath": "microsoft.entityframeworkcore.relational.6.0.4.nupkg.sha512"
     },
     "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
       "type": "package",
@@ -1839,12 +1929,26 @@
       "path": "microsoft.win32.systemevents/5.0.0",
       "hashPath": "microsoft.win32.systemevents.5.0.0.nupkg.sha512"
     },
-    "MySqlConnector/2.1.2": {
+    "MySql.Data/8.0.30": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-JVokQTUNN3WHAu9Vw8ieeq1dXTFokJiig5P0VJ4f439UxRrsPo6SaVWC8Zdm6mkPeQFhZ0/9afdWa02EY/1j/w==",
-      "path": "mysqlconnector/2.1.2",
-      "hashPath": "mysqlconnector.2.1.2.nupkg.sha512"
+      "sha512": "sha512-SRoxG9ASRQrqL/JKU9KxaWfkmWtBuw5rA7d9G34Z1w4Aq5YwvxIjuGDOkUSk/H6VOmlZ/wywgBSX9S6btbUAYg==",
+      "path": "mysql.data/8.0.30",
+      "hashPath": "mysql.data.8.0.30.nupkg.sha512"
+    },
+    "MySql.EntityFrameworkCore/6.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xE0LH98IObRdovOuxYz/Q6xfbTcb93jhokRdY3eADaY8sT+I71K/kifS0amo6BGh12mO8KZH0ltr1fCpey6xPw==",
+      "path": "mysql.entityframeworkcore/6.0.4",
+      "hashPath": "mysql.entityframeworkcore.6.0.4.nupkg.sha512"
+    },
+    "MySqlConnector/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7meR9elqyw/cF67N19MCKYzZjtyMJBlaCvjOC53XbrRQcvzER1sICpzcHwpsZF7sTxhHDZk6b3J25IOvSJaj6A==",
+      "path": "mysqlconnector/1.0.0",
+      "hashPath": "mysqlconnector.1.0.0.nupkg.sha512"
     },
     "Newtonsoft.Json/11.0.2": {
       "type": "package",
@@ -1853,12 +1957,12 @@
       "path": "newtonsoft.json/11.0.2",
       "hashPath": "newtonsoft.json.11.0.2.nupkg.sha512"
     },
-    "Pomelo.EntityFrameworkCore.MySql/6.0.1": {
+    "Portable.BouncyCastle/1.9.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-sFIo5e9RmQoCTEvH6EeSV8ptmX3dw/6XgyD8R93X/i7A9+XCeG9KTjSNjrszVjVOtCu/eyvYqqcv2uZ/BHhlYA==",
-      "path": "pomelo.entityframeworkcore.mysql/6.0.1",
-      "hashPath": "pomelo.entityframeworkcore.mysql.6.0.1.nupkg.sha512"
+      "sha512": "sha512-eZZBCABzVOek+id9Xy04HhmgykF0wZg9wpByzrWN7q8qEI0Qen9b7tfd7w8VA3dOeesumMG7C5ZPy0jk7PSRHw==",
+      "path": "portable.bouncycastle/1.9.0",
+      "hashPath": "portable.bouncycastle.1.9.0.nupkg.sha512"
     },
     "runtime.native.System.Data.SqlClient.sni/4.4.0": {
       "type": "package",
@@ -1923,6 +2027,13 @@
       "path": "swashbuckle.aspnetcore.swaggerui/6.5.0",
       "hashPath": "swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
     },
+    "System.Buffers/4.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Rw7ijyl1qqRS0YQD/WycNst8hUUMgrMH4FCn1nNm27M4VxchZ1js3fVjQaANHO5f3sN4isvP4a+Met9Y4YomAg==",
+      "path": "system.buffers/4.5.1",
+      "hashPath": "system.buffers.4.5.1.nupkg.sha512"
+    },
     "System.Collections.Immutable/6.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1965,12 +2076,12 @@
       "path": "system.io/4.3.0",
       "hashPath": "system.io.4.3.0.nupkg.sha512"
     },
-    "System.Memory/4.5.3": {
+    "System.Memory/4.5.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
-      "path": "system.memory/4.5.3",
-      "hashPath": "system.memory.4.5.3.nupkg.sha512"
+      "sha512": "sha512-1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw==",
+      "path": "system.memory/4.5.4",
+      "hashPath": "system.memory.4.5.4.nupkg.sha512"
     },
     "System.Reflection/4.3.0": {
       "type": "package",

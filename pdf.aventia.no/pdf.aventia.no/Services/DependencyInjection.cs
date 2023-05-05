@@ -1,8 +1,12 @@
 ﻿using Hangfire;
 using Hangfire.MySql;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using pdf.aventia.no.Database;
 using pdf.aventia.no.Interfaces;
+using MySql.EntityFrameworkCore.Extensions;
 
 namespace pdf.aventia.no.Services
 {
@@ -11,14 +15,10 @@ namespace pdf.aventia.no.Services
         public static IServiceCollection AddServices(this IServiceCollection services, IHostEnvironment environment, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
-            var serverVersion = ServerVersion.AutoDetect(connectionString);
 
             services.AddDbContext<PdfDbContext>(
                 options => options
-                    .UseMySql(
-                        connectionString,
-                        serverVersion,
-                        b => b.MigrationsAssembly(typeof(PdfDbContext).Assembly.FullName))
+                    .UseMySQL(connectionString)
                     .EnableSensitiveDataLogging(environment.IsDevelopment())
                     .EnableDetailedErrors(environment.IsDevelopment())
             );
