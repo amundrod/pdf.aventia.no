@@ -5,6 +5,6 @@
         public int Id { get; set; }
         public string FilePath { get; set; } = string.Empty;
         public string Text { get; set; } = string.Empty;
-        public ICollection<Paragraph> Paragraphs { get; set; }
+        public byte[] FileData { get; set; } // New field for the actual PDF data
     }
 }
