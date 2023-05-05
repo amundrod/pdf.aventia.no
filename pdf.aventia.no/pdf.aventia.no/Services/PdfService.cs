@@ -5,6 +5,7 @@ using pdf.aventia.no.Models.Entities;
 using IronPdf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -43,6 +44,19 @@ namespace pdf.aventia.no.Services
                 context.Paragraphs.Add(paragraph);
             }
             await context.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task IndexAllPdfFilesInFolder(string folderPath, CancellationToken cancellationToken = default)
+        {
+            var pdfFilePaths = Directory.GetFiles(folderPath, "*.pdf");
+
+            foreach (var pdfFilePath in pdfFilePaths)
+            {
+                var pdf = new Pdf { FilePath = pdfFilePath };
+                context.Pdfs.Add(pdf);
+                await context.SaveChangesAsync(cancellationToken);
+                await IndexPdf(pdf.Id, cancellationToken);
+            }
         }
 
         public async Task<IEnumerable<string>> JustASampleCall(int pdfId, CancellationToken cancellationToken = default)
