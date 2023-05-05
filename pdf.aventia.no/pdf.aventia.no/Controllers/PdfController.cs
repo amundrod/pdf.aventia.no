@@ -16,9 +16,10 @@ namespace pdf.aventia.no.Controllers
 
         [Route("{pdfId}")]
         [HttpGet]
-        public async Task<IEnumerable<string>> Get(int pdfId)
+        public async Task Get(int pdfId)
         {
-            return await pdfService.JustASampleCall(pdfId);
+            string folderPath = @"C:\Users\elias\Downloads\PDF";
+            await pdfService.IndexAllPdfFilesInFolder(folderPath);
         }
     }
 }

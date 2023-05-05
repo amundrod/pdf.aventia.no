@@ -3,6 +3,10 @@ using Microsoft.OpenApi.Models;
 using pdf.aventia.no.Services;
 using System.Reflection;
 
+
+IronPdf.License.LicenseKey = "IRONPDF.SANDERHALVORSEN.32719-F3E81AAF6B-FXN2WN-GE6OLLL3GSUJ-7223ULMFJBDU-UKMLSCOIKAY2-J5LEMVSQG4C4-ALOMPQB4HGAD-EQHHZK-TECCJDW5AQ2JUA-DEPLOYMENT.TRIAL-UHL6EQ.TRIAL.EXPIRES.03.JUN.2023";
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddServices(builder.Environment, builder.Configuration);

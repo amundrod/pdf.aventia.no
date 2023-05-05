@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\amund\\RiderProjects\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj": {}
+    "C:\\Users\\elias\\OneDrive\\Documents\\gitCloneTest\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj": {}
   },
   "projects": {
-    "C:\\Users\\amund\\RiderProjects\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj": {
+    "C:\\Users\\elias\\OneDrive\\Documents\\gitCloneTest\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amund\\RiderProjects\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj",
+        "projectUniqueName": "C:\\Users\\elias\\OneDrive\\Documents\\gitCloneTest\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj",
         "projectName": "pdf.aventia.no",
-        "projectPath": "C:\\Users\\amund\\RiderProjects\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj",
-        "packagesPath": "C:\\Users\\amund\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amund\\RiderProjects\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\obj\\",
+        "projectPath": "C:\\Users\\elias\\OneDrive\\Documents\\gitCloneTest\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj",
+        "packagesPath": "C:\\Users\\elias\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\elias\\OneDrive\\Documents\\gitCloneTest\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\amund\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\elias\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -92,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
