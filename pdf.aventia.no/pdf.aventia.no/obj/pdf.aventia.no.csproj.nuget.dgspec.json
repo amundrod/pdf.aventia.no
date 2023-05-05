@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\amund\\Downloads\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj": {}
+    "C:\\Users\\amund\\RiderProjects\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj": {}
   },
   "projects": {
-    "C:\\Users\\amund\\Downloads\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj": {
+    "C:\\Users\\amund\\RiderProjects\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amund\\Downloads\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj",
+        "projectUniqueName": "C:\\Users\\amund\\RiderProjects\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj",
         "projectName": "pdf.aventia.no",
-        "projectPath": "C:\\Users\\amund\\Downloads\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj",
+        "projectPath": "C:\\Users\\amund\\RiderProjects\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj",
         "packagesPath": "C:\\Users\\amund\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amund\\Downloads\\pdf.aventia.no\\pdf.aventia.no\\obj\\",
+        "outputPath": "C:\\Users\\amund\\RiderProjects\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\amund\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -51,6 +51,10 @@
             "Hangfire.MySqlStorage": {
               "target": "Package",
               "version": "[2.0.3, )"
+            },
+            "IronPdf": {
+              "target": "Package",
+              "version": "[2023.5.8, )"
             },
             "MediatR": {
               "target": "Package",
