@@ -21,7 +21,7 @@ namespace pdf.aventia.no.Controllers
         [HttpGet("index")]
         public async Task<IActionResult> IndexAllPdfFiles()
         {
-            string folderPath = @"C:\Users\amund\OneDrive\Skrivebord\PdfTest";
+            string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath;
             await pdfService.IndexAllPdfFilesInFolder(folderPath);
             return Ok("PDF files indexed successfully.");
         }
@@ -30,7 +30,7 @@ namespace pdf.aventia.no.Controllers
         [HttpGet("index/{pdfId}")]
         public async Task<IActionResult> IndexSinglePdfFile(int pdfId)
         {
-            string folderPath = @"C:\Users\amund\OneDrive\Skrivebord\PdfTest";
+            string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath;
             await pdfService.IndexSinglePdfFile(folderPath, default, pdfId);
             return Ok("PDF file indexed successfully.");
         }

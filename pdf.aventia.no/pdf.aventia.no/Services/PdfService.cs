@@ -34,7 +34,7 @@ namespace pdf.aventia.no.Services
             await context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task IndexAllPdfFilesInFolder(string folderPath = @"C:\Users\amund\OneDrive\Skrivebord\PdfTest", CancellationToken cancellationToken = default)
+        public async Task IndexAllPdfFilesInFolder(string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath, CancellationToken cancellationToken = default)
         {
             var pdfFilePaths = Directory.GetFiles(folderPath, "*.pdf");
 
@@ -47,7 +47,7 @@ namespace pdf.aventia.no.Services
             }
         }
 
-        public async Task IndexSinglePdfFile(string folderPath = @"C:\Users\amund\OneDrive\Skrivebord\PdfTest", CancellationToken cancellationToken = default, int pdfid = 0)
+        public async Task IndexSinglePdfFile(string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath, CancellationToken cancellationToken = default)
         {
             IEnumerable<string> files = Directory.EnumerateFiles(folderPath, pdfid + ".pdf");
             string filePath = files.FirstOrDefault();
