@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using pdf.aventia.no.Interfaces;
 using pdf.aventia.no.Models.Entities;
+using pdf.aventia.no.Services;
 
 namespace pdf.aventia.no.Controllers
 {
@@ -25,9 +26,9 @@ namespace pdf.aventia.no.Controllers
             return Ok("PDF files indexed successfully.");
         }
 
-        // Get paragraphs for a specific PDF ID
-        [HttpGet("{pdfId}")]
-        public async Task<IActionResult> GetParagraphsByPdfId(int pdfId)
+        // Index a single PDF file by its ID
+        [HttpGet("index/{pdfId}")]
+        public async Task<IActionResult> IndexSinglePdfFile(int pdfId)
         {
             string folderPath = @"C:\Users\amund\OneDrive\Skrivebord\PdfTest";
             await pdfService.IndexSinglePdfFile(folderPath, default, pdfId);

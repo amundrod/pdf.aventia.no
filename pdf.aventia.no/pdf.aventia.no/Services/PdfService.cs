@@ -50,13 +50,21 @@ namespace pdf.aventia.no.Services
         public async Task IndexSinglePdfFile(string folderPath = @"C:\Users\amund\OneDrive\Skrivebord\PdfTest", CancellationToken cancellationToken = default, int pdfid = 0)
         {
             IEnumerable<string> files = Directory.EnumerateFiles(folderPath, pdfid + ".pdf");
-            string filePath = files.First();
+            string filePath = files.FirstOrDefault();
 
-            var pdf = new Pdf { FilePath = filePath };
-            context.Pdfs.Add(pdf);
-            await context.SaveChangesAsync(cancellationToken);
-            await IndexPdf(pdf.Id, cancellationToken);
+            if (filePath != null)
+            {
+                var pdf = new Pdf { FilePath = filePath };
+                context.Pdfs.Add(pdf);
+                await context.SaveChangesAsync(cancellationToken);
+                await IndexPdf(pdf.Id, cancellationToken);
+            }
+            else
+            {
+                // Handle the case where the file was not found
+            }
         }
+
         //public async Task<IEnumerable<string>> JustASampleCall(int pdfId, CancellationToken cancellationToken = default)
         //{
         //    return await context.Pdfs.Where(x => x.Id == pdfId)
@@ -74,6 +82,13 @@ namespace pdf.aventia.no.Services
         public async Task<List<Pdf>> SearchPdfsAsync(string word)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task SearchPdf(int pdfId, string word, CancellationToken cancellationToken = default)
+        {
+            var pdfs = await context.Pdfs
+                .Where(x => x.Id == pdfId && x.Text.Contains(word))
+                .ToListAsync(cancellationToken);
         }
     }
 }
