@@ -29,24 +29,12 @@ namespace pdf.aventia.no.Services
             var paragraphs = extractedText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
             foreach (var paragraphText in paragraphs)
             {
-                var paragraph = new Paragraph { Text = paragraphText, Pdf = pdf };
-                var words = paragraphText.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var wordText in words)
-                {
-                    var word = await context.Words.FirstOrDefaultAsync(w => w.Text == wordText);
-                    if (word == null)
-                    {
-                        word = new Word { Text = wordText };
-                        context.Words.Add(word);
-                    }
-                    paragraph.Words.Add(word);
-                }
-                context.Paragraphs.Add(paragraph);
+                
             }
             await context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task IndexAllPdfFilesInFolder(string folderPath = @"C:\Users\elias\Downloads\PDF", CancellationToken cancellationToken = default)
+        public async Task IndexAllPdfFilesInFolder(string folderPath = @"C:\Users\amund\OneDrive\Skrivebord\PdfTest", CancellationToken cancellationToken = default)
         {
             var pdfFilePaths = Directory.GetFiles(folderPath, "*.pdf");
 
@@ -59,7 +47,7 @@ namespace pdf.aventia.no.Services
             }
         }
 
-        public async Task IndexSinglePdfFile(string folderPath = @"C:\Users\elias\Downloads\PDF", CancellationToken cancellationToken = default, int pdfid = 0)
+        public async Task IndexSinglePdfFile(string folderPath = @"C:\Users\amund\OneDrive\Skrivebord\PdfTest", CancellationToken cancellationToken = default, int pdfid = 0)
         {
             IEnumerable<string> files = Directory.EnumerateFiles(folderPath, pdfid + ".pdf");
             string filePath = files.First();
@@ -85,12 +73,7 @@ namespace pdf.aventia.no.Services
 
         public async Task<List<Pdf>> SearchPdfsAsync(string word)
         {
-            return await context.Words
-                .Where(w => w.Text == word)
-                .SelectMany(w => w.Paragraphs)
-                .Select(p => p.Pdf)
-                .Distinct()
-                .ToListAsync();
+            throw new NotImplementedException();
         }
     }
 }

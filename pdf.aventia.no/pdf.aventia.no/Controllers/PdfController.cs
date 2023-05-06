@@ -20,7 +20,7 @@ namespace pdf.aventia.no.Controllers
         [HttpGet("index")]
         public async Task<IActionResult> IndexAllPdfFiles()
         {
-            string folderPath = @"C:\Users\elias\Downloads\PDF";
+            string folderPath = @"C:\Users\amund\OneDrive\Skrivebord\PdfTest";
             await pdfService.IndexAllPdfFilesInFolder(folderPath);
             return Ok("PDF files indexed successfully.");
         }
@@ -29,7 +29,7 @@ namespace pdf.aventia.no.Controllers
         [HttpGet("{pdfId}")]
         public async Task<IActionResult> GetParagraphsByPdfId(int pdfId)
         {
-            string folderPath = @"C:\Users\elias\Downloads\PDF";
+            string folderPath = @"C:\Users\amund\OneDrive\Skrivebord\PdfTest";
             await pdfService.IndexSinglePdfFile(folderPath, default, pdfId);
             return Ok("PDF file indexed successfully.");
         }
