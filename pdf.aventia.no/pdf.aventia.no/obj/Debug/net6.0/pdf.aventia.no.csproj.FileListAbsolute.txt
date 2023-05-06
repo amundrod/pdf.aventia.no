@@ -159,7 +159,6 @@ C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf
 C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\MySqlConnector.dll
 C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\Newtonsoft.Json.dll
-C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\SixLabors.ImageSharp.dll
 C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
@@ -641,3 +640,11 @@ C:\Users\amund\RiderProjects\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\obj\De
 C:\Users\amund\RiderProjects\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\obj\Debug\net6.0\pdf.aventia.no.pdb
 C:\Users\amund\RiderProjects\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\obj\Debug\net6.0\pdf.aventia.no.genruntimeconfig.cache
 C:\Users\amund\RiderProjects\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\obj\Debug\net6.0\ref\pdf.aventia.no.dll
+C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\K4os.Compression.LZ4.dll
+C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\K4os.Compression.LZ4.Streams.dll
+C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\K4os.Hash.xxHash.dll
+C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\MySql.Data.dll
+C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\Ubiety.Dns.Core.dll
+C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\ZstdNet.dll
+C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\MySql.EntityFrameworkCore.dll
+C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\BouncyCastle.Crypto.dll

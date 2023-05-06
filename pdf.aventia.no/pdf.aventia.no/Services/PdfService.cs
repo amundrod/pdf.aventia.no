@@ -46,7 +46,7 @@ namespace pdf.aventia.no.Services
             await context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task IndexAllPdfFilesInFolder(string folderPath = @"C:\Users\amund\OneDrive\Skrivebord\PdfTest", CancellationToken cancellationToken = default)
+        public async Task IndexAllPdfFilesInFolder(string folderPath = @"C:\Users\elias\Downloads\PDF", CancellationToken cancellationToken = default)
         {
             var pdfFilePaths = Directory.GetFiles(folderPath, "*.pdf");
 
@@ -59,13 +59,23 @@ namespace pdf.aventia.no.Services
             }
         }
 
-        public async Task<IEnumerable<string>> JustASampleCall(int pdfId, CancellationToken cancellationToken = default)
+        public async Task IndexSinglePdfFile(string folderPath = @"C:\Users\elias\Downloads\PDF", CancellationToken cancellationToken = default, int pdfid = 0)
         {
-            return await context.Pdfs.Where(x => x.Id == pdfId)
-                .SelectMany(x => x.Paragraphs)
-                .Select(x => x.Text)
-                .ToListAsync(cancellationToken);
+            IEnumerable<string> files = Directory.EnumerateFiles(folderPath, pdfid + ".pdf");
+            string filePath = files.First();
+
+            var pdf = new Pdf { FilePath = filePath };
+            context.Pdfs.Add(pdf);
+            await context.SaveChangesAsync(cancellationToken);
+            await IndexPdf(pdf.Id, cancellationToken);
         }
+        //public async Task<IEnumerable<string>> JustASampleCall(int pdfId, CancellationToken cancellationToken = default)
+        //{
+        //    return await context.Pdfs.Where(x => x.Id == pdfId)
+        //        .SelectMany(x => x.Paragraphs)
+        //        .Select(x => x.Text)
+        //        .ToListAsync(cancellationToken);
+        //}
 
         public async Task ProcessPdfFiles(CancellationToken cancellationToken = default)
         {
