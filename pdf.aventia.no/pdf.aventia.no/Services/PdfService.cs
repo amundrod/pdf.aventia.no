@@ -29,7 +29,7 @@ namespace pdf.aventia.no.Services
             var paragraphs = extractedText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
             foreach (var paragraphText in paragraphs)
             {
-                
+
             }
             await context.SaveChangesAsync(cancellationToken);
         }
@@ -46,8 +46,14 @@ namespace pdf.aventia.no.Services
                 await IndexPdf(pdf.Id, cancellationToken);
             }
         }
+        
+        public Task IndexSinglePdfFile(string folderPath = GlobalSettings.DefaultFolderPath,
+            CancellationToken cancellationToken = default, int pdfid = 0)
+        {
+            throw new NotImplementedException();
+        }
 
-        public async Task IndexSinglePdfFile(string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath, CancellationToken cancellationToken = default)
+        public async Task IndexSinglePdfFile(string pdfid, string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath, CancellationToken cancellationToken = default)
         {
             IEnumerable<string> files = Directory.EnumerateFiles(folderPath, pdfid + ".pdf");
             string filePath = files.FirstOrDefault();
