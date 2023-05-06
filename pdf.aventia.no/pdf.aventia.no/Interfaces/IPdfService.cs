@@ -9,8 +9,9 @@ namespace pdf.aventia.no.Interfaces
     {
         Task IndexPdf(int pdfId, CancellationToken cancellationToken = default);
         Task IndexAllPdfFilesInFolder(string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath, CancellationToken cancellationToken = default);
-        Task IndexSinglePdfFile(string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath, CancellationToken cancellationToken = default, int pdfid = 0);
+        Task SearchPdfsAsync(string text, string word, CancellationToken cancellationToken = default);
         Task ProcessPdfFiles(CancellationToken cancellationToken = default);
-        Task<List<Pdf>> SearchPdfsAsync(string word);
+        
+       
     }
 }

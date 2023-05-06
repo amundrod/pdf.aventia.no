@@ -25,14 +25,13 @@ namespace pdf.aventia.no.Controllers
             await pdfService.IndexAllPdfFilesInFolder(folderPath);
             return Ok("PDF files indexed successfully.");
         }
-
-        // Index a single PDF file by its ID
-        [HttpGet("index/{pdfId}")]
-        public async Task<IActionResult> IndexSinglePdfFile(int pdfId)
+        [HttpGet("search")]
+        public async Task<List<Pdf>> SearchPdfsAsync(string word, CancellationToken cancellationToken = default)
         {
-            string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath;
-            await pdfService.IndexSinglePdfFile(folderPath, default, pdfId);
-            return Ok("PDF file indexed successfully.");
+            return await context.Pdfs
+                .Where(p => EF.Functions.Like(p.Text, $"%{word}%"))
+                .ToListAsync(cancellationToken);
         }
+        }
+       
     }
-}

@@ -16,7 +16,7 @@ namespace pdf.aventia.no.Services
     {
         private readonly PdfDbContext context;
 
-        public PdfService(PdfDbContext context) 
+        public PdfService(PdfDbContext context)
         {
             this.context = context;
         }
@@ -24,46 +24,42 @@ namespace pdf.aventia.no.Services
         public async Task IndexPdf(int pdfId, CancellationToken cancellationToken = default)
         {
             var pdf = await context.Pdfs.FindAsync(pdfId);
-            var pdfDoc = new IronPdf.PdfDocument(pdf.FilePath);
+            var pdfDoc = new IronPdf.PdfDocument(pdf.filepath);
             var extractedText = pdfDoc.ExtractAllText();
-            var paragraphs = extractedText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-            foreach (var paragraphText in paragraphs)
-            {
 
-            }
+            // Set the Text property of the Pdf object
+            pdf.text = extractedText;
+            // Save the changes to the database
             await context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task IndexAllPdfFilesInFolder(string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath, CancellationToken cancellationToken = default)
+        public async Task IndexAllPdfFilesInFolder(string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath,
+            CancellationToken cancellationToken = default)
         {
             var pdfFilePaths = Directory.GetFiles(folderPath, "*.pdf");
 
             foreach (var pdfFilePath in pdfFilePaths)
             {
-                var pdf = new Pdf { FilePath = pdfFilePath };
+                var pdf = new Pdf { filepath = pdfFilePath };
                 context.Pdfs.Add(pdf);
                 await context.SaveChangesAsync(cancellationToken);
-                await IndexPdf(pdf.Id, cancellationToken);
+                await IndexPdf(pdf.id, cancellationToken);
             }
         }
-        
-        public Task IndexSinglePdfFile(string folderPath = GlobalSettings.DefaultFolderPath,
-            CancellationToken cancellationToken = default, int pdfid = 0)
-        {
-            throw new NotImplementedException();
-        }
 
-        public async Task IndexSinglePdfFile(string pdfid, string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath, CancellationToken cancellationToken = default)
+        public async Task IndexSinglePdfFile(string pdfid,
+            string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath,
+            CancellationToken cancellationToken = default)
         {
             IEnumerable<string> files = Directory.EnumerateFiles(folderPath, pdfid + ".pdf");
             string filePath = files.FirstOrDefault();
 
             if (filePath != null)
             {
-                var pdf = new Pdf { FilePath = filePath };
+                var pdf = new Pdf { filepath = filePath };
                 context.Pdfs.Add(pdf);
                 await context.SaveChangesAsync(cancellationToken);
-                await IndexPdf(pdf.Id, cancellationToken);
+                await IndexPdf(pdf.id, cancellationToken);
             }
             else
             {
@@ -71,30 +67,18 @@ namespace pdf.aventia.no.Services
             }
         }
 
-        //public async Task<IEnumerable<string>> JustASampleCall(int pdfId, CancellationToken cancellationToken = default)
-        //{
-        //    return await context.Pdfs.Where(x => x.Id == pdfId)
-        //        .SelectMany(x => x.Paragraphs)
-        //        .Select(x => x.Text)
-        //        .ToListAsync(cancellationToken);
-        //}
+        public async Task<List<Pdf>> SearchPdfsAsync(string word, CancellationToken cancellationToken = default)
+        {
+            // Search for PDFs containing the specified word
+            return await context.Pdfs
+                .Where(p => EF.Functions.Like(p.text, $"%{word}%"))
+                .ToListAsync(cancellationToken);
+        }
 
         public async Task ProcessPdfFiles(CancellationToken cancellationToken = default)
         {
-            // Use this.context.Pdfs to access the Pdfs DbSet<Pdf> property.
+            // Implement the logic for processing PDF files here
             throw new NotImplementedException();
-        }
-
-        public async Task<List<Pdf>> SearchPdfsAsync(string word)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task SearchPdf(int pdfId, string word, CancellationToken cancellationToken = default)
-        {
-            var pdfs = await context.Pdfs
-                .Where(x => x.Id == pdfId && x.Text.Contains(word))
-                .ToListAsync(cancellationToken);
         }
     }
 }

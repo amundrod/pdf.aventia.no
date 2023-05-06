@@ -2,9 +2,8 @@
 {
     public class Pdf
     {
-        public int Id { get; set; }
-        public string FilePath { get; set; }
-        public string Text { get; set; }
-        public byte[] FileData { get; set; }
+        public int id { get; set; }
+        public string filepath { get; set; }
+        public string text { get; set; }
     }
 }
