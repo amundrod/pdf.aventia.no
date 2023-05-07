@@ -67,8 +67,19 @@ namespace pdf.aventia.no.Services
             }
         }
 
-        public async Task<List<Pdf>> SearchPdfsAsync(string word, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Pdf>> SearchPdfsAsync(string word, CancellationToken cancellationToken)
         {
+            if (string.IsNullOrEmpty(word))
+            {
+                return new List<Pdf>();
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context), "The context object is null.");
+            }
+
+            Console.Write(word);
             // Search for PDFs containing the specified word
             return await context.Pdfs
                 .Where(p => EF.Functions.Like(p.text, $"%{word}%"))
@@ -78,6 +89,11 @@ namespace pdf.aventia.no.Services
         public async Task ProcessPdfFiles(CancellationToken cancellationToken = default)
         {
             // Implement the logic for processing PDF files here
+            throw new NotImplementedException();
+        }
+
+        Task IPdfService.SearchPdfsAsync(string word, CancellationToken cancellationToken)
+        {
             throw new NotImplementedException();
         }
     }
