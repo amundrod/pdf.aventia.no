@@ -36,8 +36,6 @@ namespace pdf.aventia.no.Services
                 var sentences =
                     extractedText.Split(new string[] { ".", "!", "?" }, StringSplitOptions.RemoveEmptyEntries);
 
-                // Set the paragraphs property of the Pdf object to store sentences
-                pdf.paragraphs = sentences.ToList();
 
                 // Save the changes to the database
                 await context.SaveChangesAsync(cancellationToken);
