@@ -27,8 +27,11 @@ namespace pdf.aventia.no.Services
             var pdfDoc = new IronPdf.PdfDocument(pdf.filepath);
             var extractedText = pdfDoc.ExtractAllText();
 
-            // Set the Text property of the Pdf object
-            pdf.text = extractedText;
+            // Split the extracted text into paragraphs
+            var paragraphs = extractedText.Split("\n\n");
+
+            // Set the paragraphs property of the Pdf object
+            pdf.paragraphs = paragraphs.ToList();
             // Save the changes to the database
             await context.SaveChangesAsync(cancellationToken);
         }
@@ -67,36 +70,34 @@ namespace pdf.aventia.no.Services
             }
         }
 
-        public async Task<IEnumerable<Pdf>> SearchPdfsAsync(string word, CancellationToken cancellationToken)
+        public async Task<IEnumerable<string>> SearchPdfsAsync(string word, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(word))
             {
-                return new List<Pdf>();
+                return new List<string>();
             }
 
-            if (context == null)
+            var pdfs = await context.Pdfs.ToListAsync(cancellationToken);
+
+            var paragraphs = new List<string>();
+            foreach (var pdf in pdfs)
             {
-                throw new ArgumentNullException(nameof(context), "The context object is null.");
+                if (pdf.paragraphs != null)
+                {
+                    paragraphs.AddRange(pdf.paragraphs.Where(paragraph => paragraph.Contains(word)));
+                }
             }
 
-            Console.Write(word);
-            // Search for PDFs containing the specified word
-            return await context.Pdfs
-                .Where(p => EF.Functions.Like(p.text, $"%{word}%"))
-                .ToListAsync(cancellationToken);
+            // Highlight the word in the paragraphs
+            var highlightedParagraphs = paragraphs.Select(paragraph => paragraph.Replace(word, "*" + word + "*"));
+
+            return highlightedParagraphs;
         }
-
-
 
         public async Task ProcessPdfFiles(CancellationToken cancellationToken = default)
         {
             // Implement the logic for processing PDF files here
             throw new NotImplementedException();
         }
-
-       /* Task IPdfService.SearchPdfsAsync(string word, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        } */
     }
 }

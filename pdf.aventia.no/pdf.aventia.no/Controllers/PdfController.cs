@@ -1,12 +1,7 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using pdf.aventia.no.Database;
 using pdf.aventia.no.Interfaces;
-using pdf.aventia.no.Models.Entities;
-using pdf.aventia.no.Services;
-using System.Collections.Generic;
-using System.Threading;
 
 namespace pdf.aventia.no.Controllers
 {
@@ -15,12 +10,10 @@ namespace pdf.aventia.no.Controllers
     public class PdfController : ControllerBase
     {
         private readonly IPdfService pdfService;
-        private readonly PdfDbContext context;
 
-        public PdfController(IPdfService pdfService, PdfDbContext context)
+        public PdfController(IPdfService pdfService)
         {
             this.pdfService = pdfService;
-            this.context = context;
         }
 
         // Index all PDF files in the folder
@@ -33,15 +26,15 @@ namespace pdf.aventia.no.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<IEnumerable<Pdf>> SearchPdfsAsync(string word, CancellationToken cancellationToken)
+        public async Task<IEnumerable<string>> SearchPdfsAsync(string word)
         {
             if (string.IsNullOrEmpty(word))
             {
-                return new List<Pdf>();
+                return new List<string>();
             }
 
-            // Search for PDFs containing the specified word using the pdfService
-            return await pdfService.SearchPdfsAsync(word, cancellationToken);
+            // Search for PDFs containing the specified word and return highlighted paragraphs
+            return await pdfService.SearchPdfsAsync(word);
         }
     }     
 }
