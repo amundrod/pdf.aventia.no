@@ -648,3 +648,4 @@ C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf
 C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\ZstdNet.dll
 C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\MySql.EntityFrameworkCore.dll
 C:\Users\elias\OneDrive\Documents\gitCloneTest\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\amund\RiderProjects\pdf.aventia.no\pdf.aventia.no\pdf.aventia.no\bin\Debug\net6.0\HtmlAgilityPack.dll

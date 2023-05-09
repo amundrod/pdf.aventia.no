@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lArdecyYTkNg4fTtV9FvE8QLFIkdyyaBitP1kFTfjygRRY0qMy34d6UU2QaQzZ2ffVnjjrsrLw/zBP26l1+FwQ==",
+  "dgSpecHash": "JNL69PBuDMbKLa7/IhIJkj5Dq3IjvDkLA9RGG0JDAf8BQGLiOGfRt+hoHeHF/tFlezDCFa4Tkie1Lcpu99J37Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\amund\\RiderProjects\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no\\pdf.aventia.no.csproj",
   "expectedPackageFiles": [
@@ -19,6 +19,7 @@
     "C:\\Users\\amund\\.nuget\\packages\\hangfire.aspnetcore\\1.7.31\\hangfire.aspnetcore.1.7.31.nupkg.sha512",
     "C:\\Users\\amund\\.nuget\\packages\\hangfire.core\\1.7.31\\hangfire.core.1.7.31.nupkg.sha512",
     "C:\\Users\\amund\\.nuget\\packages\\hangfire.mysqlstorage\\2.0.3\\hangfire.mysqlstorage.2.0.3.nupkg.sha512",
+    "C:\\Users\\amund\\.nuget\\packages\\htmlagilitypack\\1.11.46\\htmlagilitypack.1.11.46.nupkg.sha512",
     "C:\\Users\\amund\\.nuget\\packages\\ironpdf\\2023.5.8\\ironpdf.2023.5.8.nupkg.sha512",
     "C:\\Users\\amund\\.nuget\\packages\\ironpdf.native.chrome.windows\\2023.5.13945\\ironpdf.native.chrome.windows.2023.5.13945.nupkg.sha512",
     "C:\\Users\\amund\\.nuget\\packages\\ironpdf.slim\\2023.5.8\\ironpdf.slim.2023.5.8.nupkg.sha512",

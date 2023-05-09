@@ -27,13 +27,20 @@ namespace pdf.aventia.no.Services
             var pdfDoc = new IronPdf.PdfDocument(pdf.filepath);
             var extractedText = pdfDoc.ExtractAllText();
 
-            // Split the extracted text into paragraphs
-            var paragraphs = extractedText.Split("\n\n");
+            if (extractedText != null)
+            {
+                // Store the whole extracted text
+                pdf.text = extractedText;
 
-            // Set the paragraphs property of the Pdf object
-            pdf.paragraphs = paragraphs.ToList();
-            // Save the changes to the database
-            await context.SaveChangesAsync(cancellationToken);
+                // Split the extracted text into paragraphs
+                var paragraphs = extractedText.Split(new string[] { "\n *\n" }, StringSplitOptions.None);
+
+                // Set the paragraphs property of the Pdf object
+                pdf.paragraphs = paragraphs.ToList();
+
+                // Save the changes to the database
+                await context.SaveChangesAsync(cancellationToken);
+            }
         }
 
         public async Task IndexAllPdfFilesInFolder(string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath,
@@ -79,20 +86,39 @@ namespace pdf.aventia.no.Services
 
             var pdfs = await context.Pdfs.ToListAsync(cancellationToken);
 
-            var paragraphs = new List<string>();
+            var sentencesList = new List<string>();
             foreach (var pdf in pdfs)
             {
+                // Check if pdf.paragraphs is not null
                 if (pdf.paragraphs != null)
                 {
-                    paragraphs.AddRange(pdf.paragraphs.Where(paragraph => paragraph.Contains(word)));
+                    // Iterate over each paragraph
+                    foreach (var paragraph in pdf.paragraphs)
+                    {
+                        var sentences = paragraph.Split(new[] { ".", "!", "?" }, StringSplitOptions.RemoveEmptyEntries);
+
+                        for (int i = 0; i < sentences.Length; i++)
+                        {
+                            if (sentences[i].Contains(word))
+                            {
+                                var endIndex = Math.Min(i + 2, sentences.Length - 1); // get next two sentences only
+                                var excerpt = string.Join(". ", sentences.Skip(i).Take(endIndex - i + 1));
+                                sentencesList.Add(excerpt);
+                            }
+                        }
+                    }
                 }
             }
 
-            // Highlight the word in the paragraphs
-            var highlightedParagraphs = paragraphs.Select(paragraph => paragraph.Replace(word, "*" + word + "*"));
+            // Highlight the word in the sentences
+            var highlightedSentences = sentencesList.Select(sentence => sentence.Replace(word, "*" + word + "*"));
 
-            return highlightedParagraphs;
+            return highlightedSentences;
         }
+
+
+
+
 
         public async Task ProcessPdfFiles(CancellationToken cancellationToken = default)
         {

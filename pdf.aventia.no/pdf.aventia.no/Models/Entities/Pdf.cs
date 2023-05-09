@@ -8,6 +8,7 @@ namespace pdf.aventia.no.Models.Entities
     {
         public int id { get; set; }
         public string filepath { get; set; }
+        public string text { get; set; } // Add this line to include the whole text
 
         [NotMapped]
         public List<string> paragraphs
