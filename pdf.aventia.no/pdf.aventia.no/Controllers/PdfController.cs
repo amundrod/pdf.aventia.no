@@ -5,6 +5,8 @@ using pdf.aventia.no.Database;
 using pdf.aventia.no.Interfaces;
 using pdf.aventia.no.Models.Entities;
 using pdf.aventia.no.Services;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace pdf.aventia.no.Controllers
 {
@@ -15,9 +17,10 @@ namespace pdf.aventia.no.Controllers
         private readonly IPdfService pdfService;
         private readonly PdfDbContext context;
 
-        public PdfController(IPdfService pdfService)
+        public PdfController(IPdfService pdfService, PdfDbContext context)
         {
             this.pdfService = pdfService;
+            this.context = context;
         }
 
         // Index all PDF files in the folder
@@ -28,6 +31,7 @@ namespace pdf.aventia.no.Controllers
             await pdfService.IndexAllPdfFilesInFolder(folderPath);
             return Ok("PDF files indexed successfully.");
         }
+
         [HttpGet("search")]
         public async Task<IEnumerable<Pdf>> SearchPdfsAsync(string word, CancellationToken cancellationToken)
         {
@@ -36,15 +40,8 @@ namespace pdf.aventia.no.Controllers
                 return new List<Pdf>();
             }
 
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context), "The context object is null.");
-            }
-
-            // Search for PDFs containing the specified word
-            return await context.Pdfs
-                .Where(p => EF.Functions.Like(p.text, $"%{word}%"))
-                .ToListAsync(cancellationToken);
+            // Search for PDFs containing the specified word using the pdfService
+            return await pdfService.SearchPdfsAsync(word, cancellationToken);
         }
     }     
 }

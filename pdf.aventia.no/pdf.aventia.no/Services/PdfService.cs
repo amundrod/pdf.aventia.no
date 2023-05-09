@@ -86,15 +86,17 @@ namespace pdf.aventia.no.Services
                 .ToListAsync(cancellationToken);
         }
 
+
+
         public async Task ProcessPdfFiles(CancellationToken cancellationToken = default)
         {
             // Implement the logic for processing PDF files here
             throw new NotImplementedException();
         }
 
-        Task IPdfService.SearchPdfsAsync(string word, CancellationToken cancellationToken)
+       /* Task IPdfService.SearchPdfsAsync(string word, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
-        }
+        } */
     }
 }
