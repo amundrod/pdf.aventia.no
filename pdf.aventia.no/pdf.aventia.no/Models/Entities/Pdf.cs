@@ -10,14 +10,5 @@ namespace pdf.aventia.no.Models.Entities
         public string filepath { get; set; }
         public string text { get; set; } // Add this line to include the whole text
 
-        [NotMapped]
-        public List<string> paragraphs
-        {
-            get => paragraphsJson != null ? JsonConvert.DeserializeObject<List<string>>(paragraphsJson) : null;
-            set => paragraphsJson = JsonConvert.SerializeObject(value);
-        }
-
-        [Column("paragraphsJson")]
-        public string paragraphsJson { get; set; }
     }
 }

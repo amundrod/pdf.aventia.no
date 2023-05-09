@@ -32,11 +32,12 @@ namespace pdf.aventia.no.Services
                 // Store the whole extracted text
                 pdf.text = extractedText;
 
-                // Split the extracted text into paragraphs
-                var paragraphs = extractedText.Split(new string[] { "\n *\n" }, StringSplitOptions.None);
+                // Split the extracted text into sentences
+                var sentences =
+                    extractedText.Split(new string[] { ".", "!", "?" }, StringSplitOptions.RemoveEmptyEntries);
 
-                // Set the paragraphs property of the Pdf object
-                pdf.paragraphs = paragraphs.ToList();
+                // Set the paragraphs property of the Pdf object to store sentences
+                pdf.paragraphs = sentences.ToList();
 
                 // Save the changes to the database
                 await context.SaveChangesAsync(cancellationToken);
@@ -78,45 +79,39 @@ namespace pdf.aventia.no.Services
         }
 
         public async Task<IEnumerable<string>> SearchPdfsAsync(string word, CancellationToken cancellationToken)
+{
+    if (string.IsNullOrEmpty(word))
+    {
+        return new List<string>();
+    }
+
+    var pdfs = await context.Pdfs.ToListAsync(cancellationToken);
+
+    var sentencesList = new List<string>();
+    foreach (var pdf in pdfs)
+    {
+        // Check if pdf.text is not null
+        if (pdf.text != null)
         {
-            if (string.IsNullOrEmpty(word))
+            // Split the text into sentences
+            var sentences = pdf.text.Split(new[] { ".", "!", "?" }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < sentences.Length; i++)
             {
-                return new List<string>();
-            }
-
-            var pdfs = await context.Pdfs.ToListAsync(cancellationToken);
-
-            var sentencesList = new List<string>();
-            foreach (var pdf in pdfs)
-            {
-                // Check if pdf.paragraphs is not null
-                if (pdf.paragraphs != null)
+                if (sentences[i].Contains(word))
                 {
-                    // Iterate over each paragraph
-                    foreach (var paragraph in pdf.paragraphs)
-                    {
-                        var sentences = paragraph.Split(new[] { ".", "!", "?" }, StringSplitOptions.RemoveEmptyEntries);
-
-                        for (int i = 0; i < sentences.Length; i++)
-                        {
-                            if (sentences[i].Contains(word))
-                            {
-                                var endIndex = Math.Min(i + 2, sentences.Length - 1); // get next two sentences only
-                                var excerpt = string.Join(". ", sentences.Skip(i).Take(endIndex - i + 1));
-                                sentencesList.Add(excerpt);
-                            }
-                        }
-                    }
+                    var endIndex = Math.Min(i + 2, sentences.Length - 1); // get next two sentences only
+                    var excerpt = string.Join(". ", sentences.Skip(i).Take(endIndex - i + 1));
+                    sentencesList.Add(excerpt);
                 }
             }
-
-            // Highlight the word in the sentences
-            var highlightedSentences = sentencesList.Select(sentence => sentence.Replace(word, "*" + word + "*"));
-
-            return highlightedSentences;
         }
+    }
 
+    // Highlight the word in the sentences
+    var highlightedSentences = sentencesList.Select(sentence => sentence.Replace(word, "*" + word + "*"));
 
+    return highlightedSentences;
+}
 
 
 
@@ -126,4 +121,5 @@ namespace pdf.aventia.no.Services
             throw new NotImplementedException();
         }
     }
+
 }
