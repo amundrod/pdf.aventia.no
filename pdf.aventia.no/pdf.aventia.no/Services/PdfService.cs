@@ -77,39 +77,39 @@ namespace pdf.aventia.no.Services
         }
 
         public async Task<IEnumerable<string>> SearchPdfsAsync(string word, CancellationToken cancellationToken)
-{
-    if (string.IsNullOrEmpty(word))
-    {
-        return new List<string>();
-    }
-
-    var pdfs = await context.Pdfs.ToListAsync(cancellationToken);
-
-    var sentencesList = new List<string>();
-    foreach (var pdf in pdfs)
-    {
-        // Check if pdf.text is not null
-        if (pdf.text != null)
         {
-            // Split the text into sentences
-            var sentences = pdf.text.Split(new[] { ".", "!", "?" }, StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < sentences.Length; i++)
+            var results = new List<string>();
+
+            if (string.IsNullOrEmpty(word))
             {
-                if (sentences[i].Contains(word))
+                return results;
+            }
+
+            var pdfs = await context.Pdfs.ToListAsync(cancellationToken);
+
+            foreach (var pdf in pdfs)
+            {
+                // Check if pdf.text is not null
+                if (pdf.text != null)
                 {
-                    var endIndex = Math.Min(i + 2, sentences.Length - 1); // get next two sentences only
-                    var excerpt = string.Join(". ", sentences.Skip(i).Take(endIndex - i + 1));
-                    sentencesList.Add(excerpt);
+                    // Split the text into sentences
+                    var sentences = pdf.text.Split(new[] { ".", "!", "?" }, StringSplitOptions.RemoveEmptyEntries);
+                    for (int i = 0; i < sentences.Length; i++)
+                    {
+                        if (sentences[i].Contains(word))
+                        {
+                            var endIndex = Math.Min(i + 2, sentences.Length - 1); // get next two sentences only
+                            var excerpt = string.Join(". ", sentences.Skip(i).Take(endIndex - i + 1));
+                            var highlightedExcerpt = excerpt.Replace(word, "*" + word + "*");
+                            results.Add($"PDF ID: {pdf.id} - Excerpt: {highlightedExcerpt}");
+                        }
+                    }
                 }
             }
+
+            return results;
         }
-    }
 
-    // Highlight the word in the sentences
-    var highlightedSentences = sentencesList.Select(sentence => sentence.Replace(word, "*" + word + "*"));
-
-    return highlightedSentences;
-}
 
 
 
