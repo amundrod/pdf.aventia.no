@@ -21,9 +21,9 @@ namespace pdf.aventia.no.Services
             this.context = context;
         }
 
-        public async Task IndexPdf(int pdfId, CancellationToken cancellationToken = default)
+        public async Task IndexPdf(int pdfid, CancellationToken cancellationToken = default)
         {
-            var pdf = await context.Pdfs.FindAsync(pdfId);
+            var pdf = await context.Pdfs.FindAsync(pdfid);
             var pdfDoc = new IronPdf.PdfDocument(pdf.filepath);
             var extractedText = pdfDoc.ExtractAllText();
 
