@@ -12,8 +12,10 @@ using System.Threading.Tasks;
 
 namespace pdf.aventia.no.Services
 {
+    // The PdfService class implements the IPdfService interface
     public class PdfService : IPdfService
     {
+        // Dependency injection of PdfDbContext
         private readonly PdfDbContext context;
 
         public PdfService(PdfDbContext context)
@@ -21,10 +23,16 @@ namespace pdf.aventia.no.Services
             this.context = context;
         }
 
+        // Indexes a PDF by ID
         public async Task IndexPdf(int pdfid, CancellationToken cancellationToken = default)
         {
+            // Find PDF by ID
             var pdf = await context.Pdfs.FindAsync(pdfid);
+            
+            // Load the PDF document
             var pdfDoc = new IronPdf.PdfDocument(pdf.filepath);
+            
+            // Extract all text from the PDF
             var extractedText = pdfDoc.ExtractAllText();
 
             if (extractedText != null)
@@ -33,60 +41,50 @@ namespace pdf.aventia.no.Services
                 pdf.text = extractedText;
 
                 // Split the extracted text into sentences
-                var sentences =
-                    extractedText.Split(new string[] { ".", "!", "?" }, StringSplitOptions.RemoveEmptyEntries);
-
+                var sentences = extractedText.Split(new string[] { ".", "!", "?" }, StringSplitOptions.RemoveEmptyEntries);
 
                 // Save the changes to the database
                 await context.SaveChangesAsync(cancellationToken);
             }
         }
 
+        // Indexes all PDF files in a folder
         public async Task IndexAllPdfFilesInFolder(string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath,
             CancellationToken cancellationToken = default)
         {
+            // Get all PDF files in the folder
             var pdfFilePaths = Directory.GetFiles(folderPath, "*.pdf");
 
+            // Loop through each file
             foreach (var pdfFilePath in pdfFilePaths)
             {
+                // Create a new PDF record
                 var pdf = new Pdf { filepath = pdfFilePath };
+                
+                // Add the new record to the database
                 context.Pdfs.Add(pdf);
                 await context.SaveChangesAsync(cancellationToken);
+                
+                // Index the new PDF
                 await IndexPdf(pdf.id, cancellationToken);
             }
         }
 
-        public async Task IndexSinglePdfFile(string pdfid,
-            string folderPath = pdf.aventia.no.GlobalSettings.DefaultFolderPath,
-            CancellationToken cancellationToken = default)
-        {
-            IEnumerable<string> files = Directory.EnumerateFiles(folderPath, pdfid + ".pdf");
-            string filePath = files.FirstOrDefault();
-
-            if (filePath != null)
-            {
-                var pdf = new Pdf { filepath = filePath };
-                context.Pdfs.Add(pdf);
-                await context.SaveChangesAsync(cancellationToken);
-                await IndexPdf(pdf.id, cancellationToken);
-            }
-            else
-            {
-                // Handle the case where the file was not found
-            }
-        }
-
+        // Searches for a word in all PDFs
         public async Task<IEnumerable<string>> SearchPdfsAsync(string word, CancellationToken cancellationToken)
         {
             var results = new List<string>();
 
+            // Check if word is null or empty
             if (string.IsNullOrEmpty(word))
             {
                 return results;
             }
 
+            // Get all PDFs
             var pdfs = await context.Pdfs.ToListAsync(cancellationToken);
 
+            // Loop through each PDF
             foreach (var pdf in pdfs)
             {
                 // Check if pdf.text is not null
@@ -96,9 +94,11 @@ namespace pdf.aventia.no.Services
                     var sentences = pdf.text.Split(new[] { ".", "!", "?" }, StringSplitOptions.RemoveEmptyEntries);
                     for (int i = 0; i < sentences.Length; i++)
                     {
+                        // Check if sentence contains the word
                         if (sentences[i].Contains(word))
                         {
-                            var endIndex = Math.Min(i + 2, sentences.Length - 1); // get next two sentences only
+                            // Highlight the word and return the sentence and the next two
+                            var endIndex = Math.Min(i + 2, sentences.Length - 1); 
                             var excerpt = string.Join(". ", sentences.Skip(i).Take(endIndex - i + 1));
                             var highlightedExcerpt = excerpt.Replace(word, "*" + word + "*");
                             results.Add($"PDF ID: {pdf.id} - Excerpt: {highlightedExcerpt}");
@@ -107,9 +107,9 @@ namespace pdf.aventia.no.Services
                 }
             }
 
+            // Return the search results
             return results;
         }
-
 
 
 
